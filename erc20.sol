@@ -1,15 +1,10 @@
 pragma solidity ^0.8.12;
 
-contract ERC20Token {
-    //Varibles
-    string public name;
-    string public symbol;
-    uint8 public decimal;
-    uint256 private supply;
+import "./ierc20.sol";
+import "./erc20vars.sol";
+import "./erc20event.sol";
 
-    mapping(address => uint256) _balance;
-    mapping(address => mapping(address => uint256)) _allowed;
-
+contract ERC20Token is IERC20, ERC20V, ERC20Events {
     //Constructor
     constructor(
         string memory _name,
@@ -74,14 +69,4 @@ contract ERC20Token {
     {
         return _allowed[_owner][_spender];
     }
-
-    //Events
-
-    event Transfer(address indexed _from, address indexed _to, uint256 _value);
-
-    event Approval(
-        address indexed _owner,
-        address indexed _spender,
-        uint256 _value
-    );
 }
