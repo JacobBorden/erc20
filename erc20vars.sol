@@ -8,6 +8,6 @@ contract ERC20V {
     string public symbol;
     uint8 public decimal;
     uint256 public supply;
-    mapping(address => uint256) _balance;
-    mapping(address => mapping(address => uint256)) _allowed;
+    mapping(address => uint256) balance;
+    mapping(address => mapping(address => uint256)) allowed;
 }
