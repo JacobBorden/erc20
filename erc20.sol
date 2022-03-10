@@ -10,12 +10,14 @@ contract ERC20Token is IERC20, ERC20V, ERC20Events {
         string memory _name,
         string memory _symbol,
         uint8 _decimal,
-        uint256 _supply
+        uint256 _initialSupply,
+        uint256 _maxSupply
     ) {
         name = _name;
         symbol = _symbol;
         decimal = _decimal;
-        supply = _supply;
+        supply = _initialSupply;
+        maxSupply = _maxSupply;
     }
 
     //Methods
