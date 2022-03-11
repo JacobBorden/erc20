@@ -7,8 +7,8 @@ contract Token {
     string _name = "Name";
     string _symbol = "SYB";
     uint8 _decimals = 9;
-    uint256 _initalSupply = (10 ^ _decimals) * 0;
-    uint256 _maxSupply = (10 ^ _decimals) * 1000000;
+    uint256 _initalSupply = (10**_decimals) * 0;
+    uint256 _maxSupply = (10**_decimals) * 1000000;
     ERC20Token token;
 
     constructor() {
