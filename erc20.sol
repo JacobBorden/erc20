@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
 import "./ierc20.sol";
@@ -9,13 +10,13 @@ contract ERC20Token is IERC20, ERC20V, ERC20Events {
     constructor(
         string memory _name,
         string memory _symbol,
-        uint8 _decimal,
+        uint8 _decimals,
         uint256 _initialSupply,
         uint256 _maxSupply
     ) {
         name = _name;
         symbol = _symbol;
-        decimal = _decimal;
+        decimals = _decimals;
         supply = _initialSupply;
         maxSupply = _maxSupply;
     }
@@ -70,5 +71,22 @@ contract ERC20Token is IERC20, ERC20V, ERC20Events {
         returns (uint256 remaining)
     {
         return allowed[_owner][_spender];
+    }
+
+    function mint(uint256 _amount, address _to) public {
+        require((_amount + supply) <= maxSupply);
+        require(address(0) != _to);
+        supply += _amount;
+        balance[_to] += _amount;
+        emit Transfer(address(0), _to, _amount);
+    }
+
+    function burn(uint256 _amount, address _from) public {
+        require(_amount <= supply);
+        require(address(0) != _from);
+        require(balanceOf(_from) >= _amount);
+        supply -= _amount;
+        balance[_from] -= _amount;
+        emit Transfer(_from, address(0), _amount);
     }
 }
